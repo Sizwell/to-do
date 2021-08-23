@@ -2,4 +2,4 @@
 Contributors
 ============
 
-* Sizwe <sizwe@kineticskunk.com>
+* Sizwe <sizwe.ncikana@gmail.com>

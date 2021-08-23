@@ -1,0 +1,19 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+sqlalchemy = "*"
+pydantic = {extras = ["dotenv"], version = "*"}
+fastapi = "*"
+uvicorn = "*"
+docopt = "*"
+psycopg2-binary = "*"
+
+[dev-packages]
+sqlalchemy = "*"
+to-do = {editable = true, path = "."}
+
+[requires]
+python_version = "3.9"
