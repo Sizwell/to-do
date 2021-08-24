@@ -26,6 +26,12 @@ def update_user_details(db: Session, id: int, details:to_do.schemas.UpdateUser):
 
 
 def delete_user(db: Session, user_id: int):
+    """ 
+    Delete user from databse. An exception will be raised if
+    an invalid ID is provided.
+
+    """
+
     try:
         db.query(to_do.models.User).filter(to_do.models.User.id == user_id).delete()
         db.commit()
@@ -33,15 +39,14 @@ def delete_user(db: Session, user_id: int):
         raise Exception(e)
 
 
-# Create a new task from the data sent as input
-def create_user_todo(db: Session, task: to_do.schemas.TaskCreate, user_id: int):
+def create_user_task(db: Session, task: to_do.schemas.TaskCreate, user_id: int):
     db_todo = to_do.models.Tasks(**task.dict(), owner_id=user_id)
     db.add(db_todo)
     db.commit()
     db.refresh(db_todo)
     return db_todo
 
-def create_todo2(db: Session, todo: to_do.schemas.TaskCreate):
+def create_task(db: Session, todo: to_do.schemas.TaskCreate):
     db_todo = to_do.models.Tasks(content=todo.content)
     db.add(db_todo)
     db.commit()
@@ -59,17 +64,8 @@ def get_todo_by_id(db: Session, user_id: int):
     return db.query(to_do.models.Tasks).filter(to_do.models.Tasks.id == user_id).first()
 
 
-# This function will update the task
-# def update_todo(db: Session, task_id: int, done: bool):
-#     db_todo = db.query(models.Tasks).filter(models.Tasks.id == task_id).first()
-#     db_todo.done = done
-#     db.add(db_todo)
-#     db.commit()
-#     db.refresh(db_todo)
-#     return db_todo
-
 # This function will update a task
-def update_task_details(db: Session, id: int, details:to_do.schemas.UpdateTask):
+def update_task_details(db: Session, id: int, details:to_do.schemas.UpdateUserTask):
     db.query(to_do.models.Tasks).filter(to_do.models.Tasks.id == id).update(vars(details))
     db.commit()
     return db.query(to_do.models.Tasks).filter(to_do.models.Tasks.id == id).first()
@@ -83,4 +79,8 @@ def delete_task(db: Session, task_id: int):
         raise Exception(e)    
 
 
-# def assign_task(db: Session, id: int)
+def update_task(db: Session, id: int, details:to_do.schemas.UpdateTask):
+    db.query(to_do.models.Tasks).filter(to_do.models.Tasks.id == id).update(vars(details))
+    db.commit()
+    return db.query(to_do.models.Tasks).filter(to_do.models.Tasks.id == id).first()
+   
