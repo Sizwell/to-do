@@ -1,11 +1,12 @@
-from to_do.db import Base
 from sqlalchemy import Boolean
 from sqlalchemy import Column
 from sqlalchemy import Integer
 from sqlalchemy import String
 from sqlalchemy import Table
-from sqlalchemy.orm import backref, relationship
+from sqlalchemy.orm import backref
+from sqlalchemy.orm import relationship
 from sqlalchemy.sql.schema import ForeignKey
+from to_do.db import Base
 
 
 UserTasks = Table(
@@ -21,8 +22,6 @@ class User(Base):
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String)
     surname = Column(String)
-
-    # tasks = relationship("Tasks", secondary=UserTasks)
 
     tasks = relationship("Tasks", secondary=UserTasks, back_populates='owner')
 
