@@ -1,7 +1,7 @@
 """ To-Do! CLI
 
 Usage:
-    to_do run
+    to_do server
     to_do (-h | --help)
     to_do (-v | --version)
 
@@ -10,6 +10,7 @@ Options:
     -v --version  Show version
 
 """
+
 import to_do
 import uvicorn
 
@@ -24,6 +25,6 @@ def main():
 
     args = docopt(__doc__, version=to_do_version)
 
-    if args['run']:
+    if args['server']:
         uvicorn.run("to_do.server:app",host='0.0.0.0', port=8000, reload=True)
 
