@@ -39,11 +39,3 @@ Run Application
  .. code-block::
 
     to_do --help
-
-
-What's Missing:
-===============
-- Multiple users should be assignable to one task.
-- A user can have multiple tasks.
-- There should be an API for assigning users to tasks.
-- Each user should complete the task individually, for eg. one user can complete the task while it's still uncompleted for another user.
